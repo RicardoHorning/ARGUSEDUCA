@@ -1,0 +1,1234 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trilha de Formação de Multiplicadores - 5 Encontros</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        day1: { 50: '#f0fdf4', 100: '#dcfce7', 500: '#22c55e', 600: '#16a34a', 700: '#15803d', 900: '#14532d' }, // Verde Iniciante
+                        day2: { 50: '#eff6ff', 100: '#dbeafe', 500: '#3b82f6', 600: '#2563eb', 700: '#1d4ed8', 900: '#1e3a8a' }, // Azul Básico
+                        day3: { 50: '#faf5ff', 100: '#f3e8ff', 500: '#a855f7', 600: '#9333ea', 700: '#7e22ce', 900: '#581c87' }, // Roxo Intermediário
+                        day4: { 50: '#fff7ed', 100: '#ffedd5', 500: '#f97316', 600: '#ea580c', 700: '#c2410c', 900: '#7c2d12' }, // Laranja Avançado
+                        day5: { 50: '#fef2f2', 100: '#fee2e2', 500: '#ef4444', 600: '#dc2626', 700: '#b91c1c', 900: '#7f1d1d' }, // Vermelho Profissional
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        /* Estilos de Impressão de Alta Qualidade */
+        @media print {
+            .no-print { display: none !important; }
+            body { background: white !important; color: black !important; padding: 0 !important; }
+            .print-card { box-shadow: none !important; border: 1px solid #cbd5e1 !important; page-break-inside: avoid; margin-bottom: 1rem !important; }
+            textarea, input, select { border: none !important; background: transparent !important; resize: none !important; padding: 0 !important; }
+            .print-full-width { width: 100% !important; max-width: 100% !important; }
+            .print-badge { border: 1px solid #000 !important; color: #000 !important; background: transparent !important; }
+        }
+
+        /* Animações suaves */
+        .tab-transition { transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1); }
+    </style>
+</head>
+<body class="bg-slate-100 min-h-screen text-slate-800 antialiased pb-16">
+
+    <!-- CABEÇALHO FIXO -->
+    <header class="bg-slate-900 text-white sticky top-0 z-40 shadow-md no-print">
+        <div class="max-w-5xl mx-auto px-4 py-3 flex flex-wrap items-center justify-between gap-2">
+            <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-amber-500 to-emerald-500 flex items-center justify-center text-slate-900 font-extrabold text-lg shadow">
+                    <i class="fa-solid fa-chalkboard-user"></i>
+                </div>
+                <div>
+                    <h1 class="text-base sm:text-lg font-bold leading-tight">Trilha de Formação de Multiplicadores</h1>
+                    <p class="text-xs text-slate-400">Desenvolvimento Pedagógico em 5 Encontros Práticos</p>
+                </div>
+            </div>
+
+            <!-- BARRA DE PROGRESSO DO ALUNO -->
+            <div class="flex items-center gap-3 bg-slate-800/80 px-3 py-1.5 rounded-xl border border-slate-700">
+                <div class="text-right">
+                    <span class="block text-[10px] uppercase font-bold text-slate-400 tracking-wider">Progresso da Ficha</span>
+                    <span id="progressText" class="text-xs font-extrabold text-emerald-400">0% Concluído</span>
+                </div>
+                <div class="w-20 bg-slate-700 h-2.5 rounded-full overflow-hidden">
+                    <div id="progressBar" class="bg-gradient-to-r from-emerald-500 to-teal-400 h-full w-0 transition-all duration-500"></div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- NAVEGAÇÃO DOS 5 DIAS (ABAS COM CORES TEMÁTICAS) -->
+    <nav class="bg-white border-b border-slate-200 sticky top-[57px] z-30 shadow-sm no-print">
+        <div class="max-w-5xl mx-auto px-2 flex overflow-x-auto gap-1 py-2 scrollbar-none">
+            
+            <!-- DIA 1 -->
+            <button onclick="selectDay(1)" id="tabBtn1" class="tab-btn flex-1 min-w-[130px] p-2.5 rounded-xl text-left border-2 border-transparent transition-all flex flex-col justify-between hover:bg-slate-50">
+                <div class="flex items-center justify-between mb-1">
+                    <span class="text-xs font-black uppercase text-emerald-700">Dia 01</span>
+                    <span class="text-[10px] px-1.5 py-0.5 rounded-full bg-emerald-100 text-emerald-800 font-bold">5 min</span>
+                </div>
+                <span class="text-xs font-bold text-slate-800 truncate">1 Micro-habilidade</span>
+                <span class="text-[10px] text-slate-500 font-medium">Iniciante • Indiv.</span>
+            </button>
+
+            <!-- DIA 2 -->
+            <button onclick="selectDay(2)" id="tabBtn2" class="tab-btn flex-1 min-w-[130px] p-2.5 rounded-xl text-left border-2 border-transparent transition-all flex flex-col justify-between hover:bg-slate-50">
+                <div class="flex items-center justify-between mb-1">
+                    <span class="text-xs font-black uppercase text-blue-700">Dia 02</span>
+                    <span class="text-[10px] px-1.5 py-0.5 rounded-full bg-blue-100 text-blue-800 font-bold">5 min</span>
+                </div>
+                <span class="text-xs font-bold text-slate-800 truncate">Recursos Visuais</span>
+                <span class="text-[10px] text-slate-500 font-medium">Básico • Indiv.</span>
+            </button>
+
+            <!-- DIA 3 -->
+            <button onclick="selectDay(3)" id="tabBtn3" class="tab-btn flex-1 min-w-[130px] p-2.5 rounded-xl text-left border-2 border-transparent transition-all flex flex-col justify-between hover:bg-slate-50">
+                <div class="flex items-center justify-between mb-1">
+                    <span class="text-xs font-black uppercase text-purple-700">Dia 03</span>
+                    <span class="text-[10px] px-1.5 py-0.5 rounded-full bg-purple-100 text-purple-800 font-bold">5 min</span>
+                </div>
+                <span class="text-xs font-bold text-slate-800 truncate">Aprendizagem Ativa</span>
+                <span class="text-[10px] text-slate-500 font-medium">Intermediário</span>
+            </button>
+
+            <!-- DIA 4 -->
+            <button onclick="selectDay(4)" id="tabBtn4" class="tab-btn flex-1 min-w-[130px] p-2.5 rounded-xl text-left border-2 border-transparent transition-all flex flex-col justify-between hover:bg-slate-50">
+                <div class="flex items-center justify-between mb-1">
+                    <span class="text-xs font-black uppercase text-orange-700">Dia 04</span>
+                    <span class="text-[10px] px-1.5 py-0.5 rounded-full bg-orange-100 text-orange-800 font-bold">10 min</span>
+                </div>
+                <span class="text-xs font-bold text-slate-800 truncate">Feedback e Erros</span>
+                <span class="text-[10px] text-slate-500 font-medium">Avançado • Dupla</span>
+            </button>
+
+            <!-- DIA 5 -->
+            <button onclick="selectDay(5)" id="tabBtn5" class="tab-btn flex-1 min-w-[130px] p-2.5 rounded-xl text-left border-2 border-transparent transition-all flex flex-col justify-between hover:bg-slate-50">
+                <div class="flex items-center justify-between mb-1">
+                    <span class="text-xs font-black uppercase text-red-700">Dia 05</span>
+                    <span class="text-[10px] px-1.5 py-0.5 rounded-full bg-red-100 text-red-800 font-bold">15 min</span>
+                </div>
+                <span class="text-xs font-bold text-slate-800 truncate">Treino Profissional</span>
+                <span class="text-[10px] text-slate-500 font-medium">Desafio • Trio</span>
+            </button>
+
+        </div>
+    </nav>
+
+    <!-- CONTEÚDO PRINCIPAL -->
+    <main class="max-w-5xl mx-auto px-4 pt-6 space-y-6">
+
+        <!-- BANNER DE ORIENTAÇÃO DO DIA SELECIONADO -->
+        <section id="dayBanner" class="bg-white rounded-2xl p-5 sm:p-6 shadow-sm border border-slate-200 transition-all relative overflow-hidden print-card">
+            <div id="bannerBorder" class="absolute top-0 left-0 w-2 h-full bg-emerald-500"></div>
+            
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                <div class="space-y-2 flex-1">
+                    <div class="flex flex-wrap items-center gap-2">
+                        <span id="badgeLevel" class="text-xs font-extrabold uppercase px-2.5 py-1 rounded-full bg-emerald-100 text-emerald-800">
+                            Nível Iniciante
+                        </span>
+                        <span id="badgeTime" class="text-xs font-semibold px-2.5 py-1 rounded-full bg-slate-100 text-slate-700">
+                            ⏱️ 5 minutos de duração
+                        </span>
+                        <span id="badgeTeam" class="text-xs font-semibold px-2.5 py-1 rounded-full bg-slate-100 text-slate-700">
+                            👤 Apresentação Individual
+                        </span>
+                    </div>
+
+                    <h2 id="dayTitle" class="text-xl sm:text-2xl font-black text-slate-900">
+                        Dia 1: Ensinando 1 Micro-habilidade Prática
+                    </h2>
+
+                    <p id="dayPedagogicalGoal" class="text-sm text-slate-600 font-medium leading-relaxed">
+                        Foco pedagógico: Perder o medo de falar em público e ensinar apenas UM movimento ou regra de segurança de forma extremamente clara e objetiva.
+                    </p>
+                </div>
+
+                <!-- BOTÃO DE EXEMPLO MODELO PREENCHIDO -->
+                <div class="no-print">
+                    <button onclick="loadExampleData()" class="w-full md:w-auto bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold py-3 px-4 rounded-xl shadow-sm hover:shadow transition flex items-center justify-center gap-2 text-xs sm:text-sm active:scale-95 border border-amber-400">
+                        <i class="fa-solid fa-lightbulb text-base"></i>
+                        <span>Carregar Exemplo Modelo Preenchido</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- FORMULÁRIO DINÂMICO (INJETADO VIA JS DE ACORDO COM O DIA) -->
+        <form id="activeForm" onsubmit="event.preventDefault();" class="space-y-6">
+            <!-- Renderizado dinamicamente -->
+        </form>
+
+        <!-- BARRA DE AÇÕES FIXA / RODAPÉ -->
+        <section class="no-print bg-white p-4 sm:p-5 rounded-2xl border border-slate-200 shadow-sm flex flex-col sm:flex-row flex-wrap items-center justify-between gap-3">
+            <div class="flex items-center gap-2 w-full sm:w-auto">
+                <button onclick="saveCurrentDayData(true)" class="flex-1 sm:flex-none bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 px-5 rounded-xl transition shadow-sm active:scale-95 text-xs sm:text-sm flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-floppy-disk"></i>
+                    <span>Salvar Rascunho</span>
+                </button>
+
+                <button onclick="shareWhatsApp()" class="flex-1 sm:flex-none bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-5 rounded-xl transition shadow-sm active:scale-95 text-xs sm:text-sm flex items-center justify-center gap-2">
+                    <i class="fa-brands fa-whatsapp text-base"></i>
+                    <span>Enviar WhatsApp</span>
+                </button>
+            </div>
+
+            <div class="flex items-center gap-2 w-full sm:w-auto justify-end">
+                <button onclick="copyFormattedText()" class="bg-slate-800 hover:bg-slate-900 text-white font-semibold py-3 px-4 rounded-xl transition active:scale-95 text-xs sm:text-sm flex items-center justify-center gap-2">
+                    <i class="fa-regular fa-copy"></i>
+                    <span>Copiar Texto</span>
+                </button>
+
+                <button onclick="prepareAndPrint()" class="bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold py-3 px-4 rounded-xl transition active:scale-95 text-xs sm:text-sm flex items-center justify-center gap-2 border border-slate-200">
+                    <i class="fa-solid fa-print"></i>
+                    <span>Imprimir / PDF</span>
+                </button>
+
+                <button onclick="clearCurrentDay()" class="bg-red-50 hover:bg-red-100 text-red-600 font-semibold py-3 px-3 rounded-xl transition active:scale-95 text-xs sm:text-sm flex items-center justify-center gap-1.5" title="Limpar formulário deste dia">
+                    <i class="fa-regular fa-trash-can"></i>
+                </button>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- TOAST NOTIFICATION -->
+    <div id="toast" class="fixed bottom-5 right-5 bg-slate-900 text-white text-xs font-semibold px-4 py-3 rounded-xl shadow-2xl z-50 transform translate-y-20 opacity-0 transition-all duration-300 flex items-center gap-2 pointer-events-none border border-slate-700">
+        <i id="toastIcon" class="fa-solid fa-circle-check text-emerald-400 text-base"></i>
+        <span id="toastMessage">Ação realizada com sucesso!</span>
+    </div>
+
+    <!-- JAVASCRIPT DA APLICAÇÃO -->
+    <script>
+        // ESTADO GLOBAL
+        let currentDay = 1;
+
+        // DADOS EXEMPLO PREENCHIDOS PARA CADA DIA (REALISMO DE CHÃO DE FÁBRICA / INDÚSTRIA)
+        const EXAMPLES = {
+            1: {
+                groupName: "Turma A - Turno Manhã",
+                participants: ["Carlos Eduardo (Desossa)"],
+                area: "Desossa",
+                topic: "Empunhadura Segura da Faca e Distância de Corte (Micro-habilidade)",
+                objective: "Ao final de 5 minutos, o colega demonstrará a empunhadura tipo 'pistola' na faca de desossa mantendo 30cm de distância do corpo.",
+                step1_hook: "Quem aqui já tomou um susto com a faca escapando perto da coxa por causa da pegada errada no cabo?",
+                step1_benefit: "Aprender a empunhadura correta evita cortes acidentais e reduz o cansaço do pulso no final do turno.",
+                step2_action: "Segurar o cabo com os quatro dedos firmes, encaixando o indicador na proteção da lâmina, mantendo a lâmina apontada sempre para fora do corpo com raio de 30cm de segurança.",
+                step2_resource: "Demonstração prática com faca de treino (sem corte) e bainha de proteção.",
+                step3_recap: "Lembre-se: pegada firme como uma pistola e lâmina cortando para longe do seu corpo.",
+                step3_check: "Vou pedir para o colega João pegar a faca de treino e me mostrar a posição correta dos 4 dedos no cabo.",
+                chk1: true, chk2: true, chk3: true, chk4: true
+            },
+            2: {
+                groupName: "Mesa 2 - Refile Técnico",
+                participants: ["Mariana Souza (Refile)"],
+                area: "Refile",
+                topic: "Identificação Visual do Padrão de Gordura da Picanha (1cm Uniforme)",
+                objective: "Identificar visualmente a diferença entre o Padrão Bom (1cm de gordura uniforme) e Padrão Ruim (gordura 'riscada' ou murcha) utilizando peças de amostra.",
+                step1_hook: "Vocês sabiam que uma picanha refilada com gordura abaixo do padrão perde até 25% do valor de venda na exportação?",
+                step1_benefit: "Ajustar a lâmina no ângulo correto garante que a peça mantenha a capa de gordura perfeita sem retrabalho.",
+                step2_good_sample: "Amostra A (Padrão Excelente): Capa de gordura contínua de 1cm de espessura, sem marcas de lâmina na carne vermelha.",
+                step2_bad_sample: "Amostra B (Padrão Incorreto): Gordura 'picotada', lâmina entrou na carne e deixou falhas visíveis abaixo de 0,5cm.",
+                step2_execution_steps: "1. Posicionar a lâmina paralela à peça.\n2. Fazer um único corte fluido sem serrar.\n3. Usar a régua de medição visual para checar a espessura de 1cm.",
+                step3_recap: "O refile perfeito é corte único e contínuo, preservando 1cm de gordura sem picotar a carne.",
+                step3_check: "Qual destas duas peças na mesa está pronta para embalagem e por quê?",
+                chk1: true, chk2: true, chk3: true, chk4: true
+            },
+            3: {
+                groupName: "Grupo Qualidade total",
+                participants: ["Roberto Lima (Produção / Embalagem)"],
+                area: "Produção",
+                topic: "Colocação e Ajuste Seguro da Luva de Malha de Aço e Manguito",
+                objective: "Fazer 100% da turma vestir e ajustar a luva de aço com o esticador de silicone em menos de 1 minuto sem folgas nas pontas dos dedos.",
+                step1_hook: "Quem já trabalhou com a luva de aço 'sobrando' na ponta do dedo e sentiu a luva enroscar no gancho?",
+                step1_benefit: "A luva ajustada do jeito certo dá mais firmeza no manuseio e elimina o risco de prender nas máquinas.",
+                step2_demo: "Vou vestir a luva de aço na mão não dominante, puxar o manguito até o antebraço e colocar o esticador de silicone em X sobre o dorso da mão.",
+                step2_audience_action: "Agora, todos peguem a luva de aço em suas bancadas! Em duplas: o colega da esquerda veste a luva e o colega da direita inspeciona se há folga nas pontas dos dedos.",
+                step2_realtime_correction: "Atenção no grupo do fundo: ajustem a tira de silicone no segundo pino para esticar bem na ponta do indicador!",
+                step3_recap: "Luva de aço perfeita é luva justa sem folga nos dedos e com esticador travado no dorso.",
+                step3_check: "Levantem a mão vestida com a luva de aço e façam o movimento de fechar a mão para testar o conforto!",
+                chk1: true, chk2: true, chk3: true, chk4: true
+            },
+            4: {
+                groupName: "Dupla Segurança e Processos",
+                participants: ["Sérgio Oliveira (Líder Desossa)", "Patrícia Alves (Monitora Qualidade)"],
+                area: "Desossa",
+                topic: "Diagnóstico e Correção do Vício Operacional de 'Golpear' a Carne em Vez de Deslizar a Lâmina",
+                objective: "Diagnosticar o vício de 'golpear' a peça na desossa e aplicar o feedback construtivo de 3 passos para reeducação do colaborador.",
+                step1_error_diag: "Vício observado: Colaboradores batendo a faca com força na peça para descolar o osso, gerando rebarbas na carne e risco de quebra de lâmina.",
+                step1_impacts: "Impacto no Produto: Perda de rendimento por carne presa no osso.\nImpacto na Segurança: Risco alto de rebote da faca para a mão oposta.",
+                step2_step1_praise: "Passo 1 (Elogio/Pontos Fortes): 'João, sua agilidade no ritmo de produção e pontualidade no setor são exemplares.'",
+                step2_step2_show_error: "Passo 2 (Mostrar o erro de forma neutra): 'Porém, notei que você está dando golpes rápidos na carne. Veja nesta peça como o osso ficou marcado e a carne ficou picotada.'",
+                step2_step3_teach_correct: "Passo 3 (Ensinar o correto): 'O movimento correto é encostar o talão da faca no osso e deslizar a lâmina em ângulo de 45º, aproveitando todo o fio.'",
+                step3_recap: "Corrigir vícios requer paciência: elogiar a atitude, mostrar o impacto do erro no produto e ensinar o movimento correto.",
+                step3_pact: "Pacto firmado: O colaborador fará 10 peças no ritmo lento focando em deslizar a lâmina, com acompanhamento do líder ao final da hora.",
+                chk1: true, chk2: true, chk3: true, chk4: true
+            },
+            5: {
+                groupName: "Trio Especialistas em Processos",
+                participants: [
+                    "Facilitador Principal: Fernando Costa",
+                    "Demonstrador Técnico: Ricardo Mendes",
+                    "Avaliador de Prática: Juliana Martins"
+                ],
+                area: "Desossa / Refile",
+                topic: "Treinamento Completo: Retirada da Picanha com Rendimento Máximo e Segurança Absoluta",
+                objective: "Ao final deste treinamento de 15 minutos, os participantes executarão o corte de separação da picanha na 3ª vértebra com rendimento de 98% e zero incisão no miolo da alcatra.",
+                
+                // Bloco 1 (3m)
+                b1_title: "1. Abertura Motivacional & História Real",
+                b1_content: "Apresentação da equipe de multiplicadores. Apresentação do indicador de perda de rendimento do último mês (R$ 15 mil perdidos em peças cortadas fora do padrão da 3ª vértebra). Exposição da meta do dia.",
+                
+                // Bloco 2 (3m)
+                b2_title: "2. Base Teórica & Anatomia do Corte",
+                b2_content: "Explicação anatômica de onde se localiza exatamente a 3ª vértebra lombar. Apresentação do porquê técnico: cortar na 2ª vértebra descaracteriza a picanha, e cortar na 4ª vértebra arrasta carne dura da alcatra.",
+
+                // Bloco 3 (4m)
+                b3_title: "3. Demonstração Técnica desacelerada (Demonstrador)",
+                b3_content: "Ricardo (Demonstrador) realiza a separação na mesa técnica em ritmo lento, enquanto Fernando (Facilitador) narra cada passo: 1) Palpação da vértebra; 2) Encaixe da ponta da faca em 30º; 3) Tração contínua deslizando pela membrana natural.",
+
+                // Bloco 4 (3m)
+                b4_title: "4. Prática Guiada dos Alunos & Avaliação em Tempo Real",
+                b4_content: "Dois participantes da turma vêm à mesa e executam a separação. Juliana (Avaliadora) utiliza o checklist de 5 itens e orienta a correção de postura imediatamente caso a lâmina desvie.",
+
+                // Bloco 5 (2m)
+                b5_title: "5. Encerramento, Cartão de Bolso & Plano de Ação",
+                b5_content: "Recapitulação dos 3 pontos de ouro do corte. Entrega do cartão de referência rápida para fixar no posto de trabalho. Assinatura do compromisso de qualidade da turma.",
+
+                // Rubrica de Autoavaliação
+                rubric1: "5", // Domínio Técnico
+                rubric2: "5", // Didática e Clareza
+                rubric3: "4", // Uso dos Recursos e Demonstração
+                rubric4: "5", // Sincronia do Trio e Gestão do Tempo
+                chk1: true, chk2: true, chk3: true, chk4: true
+            }
+        };
+
+        // INICIALIZAÇÃO PÁGINA
+        window.addEventListener('DOMContentLoaded', () => {
+            selectDay(1);
+        });
+
+        // TROCAR DE DIA / NÍVEL
+        function selectDay(dayNum) {
+            currentDay = dayNum;
+            updateTabNavigationUI();
+            updateBannerUI();
+            renderActiveForm();
+            loadCurrentDayData();
+            updateProgress();
+        }
+
+        // ATUALIZA VISUAL DAS ABAS
+        function updateTabNavigationUI() {
+            for (let i = 1; i <= 5; i++) {
+                const btn = document.getElementById(`tabBtn${i}`);
+                if (i === currentDay) {
+                    btn.classList.add('bg-white', 'shadow-md', 'border-slate-800', 'scale-[1.02]');
+                    btn.classList.remove('border-transparent');
+                } else {
+                    btn.classList.remove('bg-white', 'shadow-md', 'border-slate-800', 'scale-[1.02]');
+                    btn.classList.add('border-transparent');
+                }
+            }
+        }
+
+        // ATUALIZA BANNER DO DIA
+        function updateBannerUI() {
+            const border = document.getElementById('bannerBorder');
+            const badgeLevel = document.getElementById('badgeLevel');
+            const badgeTime = document.getElementById('badgeTime');
+            const badgeTeam = document.getElementById('badgeTeam');
+            const dayTitle = document.getElementById('dayTitle');
+            const goal = document.getElementById('dayPedagogicalGoal');
+
+            const configs = {
+                1: {
+                    border: 'bg-emerald-500',
+                    badgeBg: 'bg-emerald-100 text-emerald-800',
+                    level: 'Nível Iniciante', time: '⏱️ 5 minutos', team: '👤 Apresentação Individual',
+                    title: 'Dia 1: Ensinando 1 Micro-habilidade Prática',
+                    goal: 'Foco pedagógico: Perder o medo da oratória e ensinar APENAS UM movimento, empunhadura ou regra de segurança de forma clara e objetiva.'
+                },
+                2: {
+                    border: 'bg-blue-500',
+                    badgeBg: 'bg-blue-100 text-blue-800',
+                    level: 'Nível Básico', time: '⏱️ 5 minutos', team: '👤 Apresentação Individual',
+                    title: 'Dia 2: Uso de Recursos Didáticos e Amostras Visuais',
+                    goal: 'Foco pedagógico: Ensinar usando apoio visual comparativo (Padrão Bom vs Padrão Ruim de Refile/Desossa) para o aluno aprender vendo o produto real.'
+                },
+                3: {
+                    border: 'bg-purple-500',
+                    badgeBg: 'bg-purple-100 text-purple-800',
+                    level: 'Nível Intermediário', time: '⏱️ 5 minutos', team: '👥 Prática com a Turma',
+                    title: 'Dia 3: Aprendizagem Ativa (Fazer a Turma Praticar)',
+                    goal: 'Foco pedagógico: Colocar a turma para executar o movimento durante a sua fala. Você demonstra e orienta os colegas em tempo real.'
+                },
+                4: {
+                    border: 'bg-orange-500',
+                    badgeBg: 'bg-orange-100 text-orange-800',
+                    level: 'Nível Avançado', time: '⏱️ 10 minutos', team: '👥 Individual ou Dupla',
+                    title: 'Dia 4: Diagnóstico de Erros e Feedback Construtivo',
+                    goal: 'Foco pedagógico: Mapear vícios de execução do chão de fábrica, mostrar os impactos na segurança/qualidade e aplicar a técnica de feedback em 3 passos.'
+                },
+                5: {
+                    border: 'bg-red-500',
+                    badgeBg: 'bg-red-100 text-red-800',
+                    level: 'Nível Profissional • Desafio Final', time: '⏱️ 15 minutos', team: '👥👥 Duplas ou Trios',
+                    title: 'Dia 5: Treinamento Completo de Nível Profissional',
+                    goal: 'Foco pedagógico: Conduzir um treinamento estruturado em 5 blocos com divisão explícita de papéis (Facilitador, Demonstrador e Avaliador) + Rubrica Profissional.'
+                }
+            };
+
+            const cfg = configs[currentDay];
+            border.className = `absolute top-0 left-0 w-2 h-full ${cfg.border}`;
+            badgeLevel.className = `text-xs font-extrabold uppercase px-2.5 py-1 rounded-full ${cfg.badgeBg}`;
+            badgeLevel.innerText = cfg.level;
+            badgeTime.innerText = cfg.time;
+            badgeTeam.innerText = cfg.team;
+            dayTitle.innerText = cfg.title;
+            goal.innerText = cfg.goal;
+        }
+
+        // RENDERIZA FORMULÁRIO ESPECÍFICO DO DIA
+        function renderActiveForm() {
+            const container = document.getElementById('activeForm');
+
+            // Cabeçalho de identificação comum
+            let html = `
+                <section class="bg-white rounded-2xl p-5 sm:p-6 shadow-sm border border-slate-200 space-y-4 print-card">
+                    <h3 class="text-base font-bold text-slate-900 border-b border-slate-100 pb-2 flex items-center gap-2">
+                        <i class="fa-solid fa-address-card text-slate-600"></i>
+                        1. Identificação do Treinamento (Encontro Dia ${currentDay})
+                    </h3>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Nome do Grupo / Mesa:</label>
+                            <input type="text" id="groupName" oninput="autoSave()" placeholder="Ex: Grupo 1 - Turno A" class="w-full text-sm bg-slate-50 border border-slate-300 rounded-xl p-2.5 outline-none focus:border-slate-800 transition">
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Área Relacionada:</label>
+                            <select id="area" onchange="autoSave()" class="w-full text-sm bg-slate-50 border border-slate-300 rounded-xl p-2.5 outline-none focus:border-slate-800 transition">
+                                <option value="Desossa">🥩 Desossa</option>
+                                <option value="Refile">🔪 Refile</option>
+                                <option value="Produção">⚙️ Produção / Embalagem</option>
+                                <option value="Segurança / Qualidade">🛡️ Segurança / Qualidade</option>
+                                <option value="Outra">📦 Outra Área</option>
+                            </select>
+                        </div>
+
+                        <div class="md:col-span-2">
+                            <label class="block text-xs font-bold text-slate-700 uppercase mb-1">
+                                Integrantes / Participantes: ${currentDay === 5 ? '(Atribuição de Papéis para o Trio)' : ''}
+                            </label>
+                            <div id="participantsContainer" class="space-y-2">
+                                <!-- Injetado via JS -->
+                            </div>
+                            ${currentDay === 5 ? '' : `
+                                <button type="button" onclick="addParticipantInput()" class="no-print text-xs text-emerald-700 hover:text-emerald-900 font-bold mt-2 flex items-center gap-1">
+                                    <i class="fa-solid fa-plus-circle"></i> Adicionar Participante
+                                </button>
+                            `}
+                        </div>
+
+                        <div class="md:col-span-2">
+                            <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Tema Específico da Aula:</label>
+                            <input type="text" id="topic" oninput="autoSave()" placeholder="Ex: Procedimento prático de..." class="w-full text-sm bg-slate-50 border border-slate-300 rounded-xl p-2.5 outline-none focus:border-slate-800 transition">
+                        </div>
+
+                        <div class="md:col-span-2">
+                            <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Objetivo de Aprendizagem (O que o colega aprenderá?):</label>
+                            <textarea id="objective" oninput="autoSave()" rows="2" placeholder="Ao final deste treinamento, o participante será capaz de..." class="w-full text-sm bg-slate-50 border border-slate-300 rounded-xl p-2.5 outline-none focus:border-slate-800 transition"></textarea>
+                        </div>
+                    </div>
+                </section>
+            `;
+
+            // CAMPOS ESPECÍFICOS DE ACORDO COM O DIA
+            if (currentDay === 1) {
+                html += renderDay1Fields();
+            } else if (currentDay === 2) {
+                html += renderDay2Fields();
+            } else if (currentDay === 3) {
+                html += renderDay3Fields();
+            } else if (currentDay === 4) {
+                html += renderDay4Fields();
+            } else if (currentDay === 5) {
+                html += renderDay5Fields();
+            }
+
+            // CHECKLIST DO INSTRUTOR COMUM A TODOS OS DIAS
+            html += renderChecklistSection();
+
+            container.innerHTML = html;
+            renderParticipantsInputs();
+        }
+
+        // --- CAMPOS DIA 1 ---
+        function renderDay1Fields() {
+            return `
+                <section class="bg-white rounded-2xl p-5 sm:p-6 shadow-sm border border-slate-200 space-y-5 print-card">
+                    <h3 class="text-base font-bold text-slate-900 border-b border-slate-100 pb-2 flex items-center gap-2">
+                        <i class="fa-solid fa-clock text-emerald-600"></i>
+                        2. Roteiro Cronológico da Microaula (5 Minutos)
+                    </h3>
+
+                    <!-- ABERTURA -->
+                    <div class="border-l-4 border-emerald-500 pl-4 space-y-3 bg-emerald-50/40 p-3 rounded-r-xl">
+                        <span class="text-xs font-extrabold uppercase bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded">FASE 1: ABERTURA (1 minuto)</span>
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-800 mb-1">Pergunta Disparadora / Gancho de Atenção:</label>
+                            <input type="text" id="step1_hook" oninput="autoSave()" placeholder="Como prender a atenção da turma no primeiro segundo?" class="w-full text-sm bg-white border border-slate-300 rounded-lg p-2.5 outline-none focus:border-emerald-600">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-800 mb-1">Apresentação do Benefício Real:</label>
+                            <input type="text" id="step1_benefit" oninput="autoSave()" placeholder="Por que aprender isto ajuda o colega no dia a dia?" class="w-full text-sm bg-white border border-slate-300 rounded-lg p-2.5 outline-none focus:border-emerald-600">
+                        </div>
+                    </div>
+
+                    <!-- DESENVOLVIMENTO -->
+                    <div class="border-l-4 border-blue-500 pl-4 space-y-3 bg-blue-50/40 p-3 rounded-r-xl">
+                        <span class="text-xs font-extrabold uppercase bg-blue-100 text-blue-800 px-2 py-0.5 rounded">FASE 2: DEMONSTRAÇÃO DA MICRO-HABILIDADE (3 minutos)</span>
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-800 mb-1">Passo a Passo Único e Claro (Ação Prática):</label>
+                            <textarea id="step2_action" oninput="autoSave()" rows="3" placeholder="Explique o movimento correto em até 3 passos curtos..." class="w-full text-sm bg-white border border-slate-300 rounded-lg p-2.5 outline-none focus:border-blue-600"></textarea>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-800 mb-1">Recurso ou Objeto Simples de Apoio:</label>
+                            <input type="text" id="step2_resource" oninput="autoSave()" placeholder="Ex: Faca de treino, bainha, luva ou EPI simples" class="w-full text-sm bg-white border border-slate-300 rounded-lg p-2.5 outline-none focus:border-blue-600">
+                        </div>
+                    </div>
+
+                    <!-- FECHAMENTO -->
+                    <div class="border-l-4 border-amber-500 pl-4 space-y-3 bg-amber-50/40 p-3 rounded-r-xl">
+                        <span class="text-xs font-extrabold uppercase bg-amber-100 text-amber-800 px-2 py-0.5 rounded">FASE 3: FECHAMENTO & CHECAGEM (1 minuto)</span>
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-800 mb-1">Resumo da Regra de Ouro em 1 Frase:</label>
+                            <input type="text" id="step3_recap" oninput="autoSave()" placeholder="Frase marcante de encerramento..." class="w-full text-sm bg-white border border-slate-300 rounded-lg p-2.5 outline-none focus:border-amber-600">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-800 mb-1">Pergunta ou Demonstração de Checagem Rápida:</label>
+                            <input type="text" id="step3_check" oninput="autoSave()" placeholder="O que você vai pedir para o colega explicar ou mostrar?" class="w-full text-sm bg-white border border-slate-300 rounded-lg p-2.5 outline-none focus:border-amber-600">
+                        </div>
+                    </div>
+                </section>
+            `;
+        }
+
+        // --- CAMPOS DIA 2 ---
+        function renderDay2Fields() {
+            return `
+                <section class="bg-white rounded-2xl p-5 sm:p-6 shadow-sm border border-slate-200 space-y-5 print-card">
+                    <h3 class="text-base font-bold text-slate-900 border-b border-slate-100 pb-2 flex items-center gap-2">
+                        <i class="fa-solid fa-eye text-blue-600"></i>
+                        2. Roteiro de Demonstração com Recursos Visuais (5 Minutos)
+                    </h3>
+
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-800 mb-1">1. Gancho Inicial & Pergunta de Abertura:</label>
+                            <input type="text" id="step1_hook" oninput="autoSave()" placeholder="Ex: Quem já viu uma peça ser descartada por falha no refile?" class="w-full text-sm bg-slate-50 border border-slate-300 rounded-lg p-2.5 outline-none focus:border-blue-600">
+                        </div>
+
+                        <!-- COMPARATIVO VISUAL -->
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 bg-blue-50/50 p-4 rounded-xl border border-blue-100">
+                            <div>
+                                <label class="block text-xs font-bold text-emerald-800 uppercase mb-1">🟢 Amostra A (Padrão Bom / Correto):</label>
+                                <textarea id="step2_good_sample" oninput="autoSave()" rows="3" placeholder="Descreva as características visuais da peça perfeita..." class="w-full text-sm bg-white border border-emerald-300 rounded-lg p-2.5 outline-none focus:border-emerald-600"></textarea>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-red-800 uppercase mb-1">🔴 Amostra B (Padrão Ruim / Com Falha):</label>
+                                <textarea id="step2_bad_sample" oninput="autoSave()" rows="3" placeholder="Descreva os defeitos visuais que a turma deve evitar..." class="w-full text-sm bg-white border border-red-300 rounded-lg p-2.5 outline-none focus:border-red-600"></textarea>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-800 mb-1">2. Passo a Passo do Ajuste para Atingir o Padrão Bom:</label>
+                            <textarea id="step2_execution_steps" oninput="autoSave()" rows="3" placeholder="Como o operador ajusta o ângulo da faca/ferramenta para não errar?" class="w-full text-sm bg-slate-50 border border-slate-300 rounded-lg p-2.5 outline-none focus:border-blue-600"></textarea>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-800 mb-1">3. Resumo em Uma Frase:</label>
+                                <input type="text" id="step3_recap" oninput="autoSave()" placeholder="Frase de síntese da qualidade..." class="w-full text-sm bg-slate-50 border border-slate-300 rounded-lg p-2.5 outline-none focus:border-blue-600">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-800 mb-1">4. Pergunta de Checagem Visual:</label>
+                                <input type="text" id="step3_check" oninput="autoSave()" placeholder="Mostre as peças e pergunte qual é a aprovada..." class="w-full text-sm bg-slate-50 border border-slate-300 rounded-lg p-2.5 outline-none focus:border-blue-600">
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            `;
+        }
+
+        // --- CAMPOS DIA 3 ---
+        function renderDay3Fields() {
+            return `
+                <section class="bg-white rounded-2xl p-5 sm:p-6 shadow-sm border border-slate-200 space-y-5 print-card">
+                    <h3 class="text-base font-bold text-slate-900 border-b border-slate-100 pb-2 flex items-center gap-2">
+                        <i class="fa-solid fa-people-hands text-purple-600"></i>
+                        2. Roteiro de Aprendizagem Ativa e Prática em Duplas (5 Minutos)
+                    </h3>
+
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-800 mb-1">1. Gancho & Chamada para Ação:</label>
+                            <input type="text" id="step1_hook" oninput="autoSave()" placeholder="Abertura rápida convidando a turma a pegar os materiais..." class="w-full text-sm bg-slate-50 border border-slate-300 rounded-lg p-2.5 outline-none focus:border-purple-600">
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-800 mb-1">2. Demonstração Rápida do Multiplicador (1 minuto):</label>
+                            <textarea id="step2_demo" oninput="autoSave()" rows="2" placeholder="O que você fará primeiro na frente de todos para exemplificar?" class="w-full text-sm bg-slate-50 border border-slate-300 rounded-lg p-2.5 outline-none focus:border-purple-600"></textarea>
+                        </div>
+
+                        <!-- PRÁTICA DA TURMA -->
+                        <div class="bg-purple-50/60 p-4 rounded-xl border border-purple-200 space-y-3">
+                            <span class="text-xs font-extrabold uppercase bg-purple-200 text-purple-900 px-2 py-0.5 rounded">✋ PRÁTICA SIMULTÂNEA DA TURMA (2 minutos)</span>
+                            
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-800 mb-1">Instrução da Dinâmica (O que a turma fará em duplas/trios?):</label>
+                                <textarea id="step2_audience_action" oninput="autoSave()" rows="3" placeholder="Ex: 'Em duplas, o colega A veste a luva e o colega B inspeciona o ajuste...'" class="w-full text-sm bg-white border border-purple-300 rounded-lg p-2.5 outline-none focus:border-purple-600"></textarea>
+                            </div>
+
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-800 mb-1">Ponto de Atenção para Correção em Tempo Real:</label>
+                                <input type="text" id="step2_realtime_correction" oninput="autoSave()" placeholder="O que você observará enquanto circula pelas mesas?" class="w-full text-sm bg-white border border-purple-300 rounded-lg p-2.5 outline-none focus:border-purple-600">
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-800 mb-1">3. Resumo Prático:</label>
+                                <input type="text" id="step3_recap" oninput="autoSave()" placeholder="Sua fala de encerramento da prática..." class="w-full text-sm bg-slate-50 border border-slate-300 rounded-lg p-2.5 outline-none focus:border-purple-600">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-800 mb-1">4. Verificação em Conjunto:</label>
+                                <input type="text" id="step3_check" oninput="autoSave()" placeholder="Pedir para todos erguerem a mão ou demonstrarem juntos..." class="w-full text-sm bg-slate-50 border border-slate-300 rounded-lg p-2.5 outline-none focus:border-purple-600">
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            `;
+        }
+
+        // --- CAMPOS DIA 4 ---
+        function renderDay4Fields() {
+            return `
+                <section class="bg-white rounded-2xl p-5 sm:p-6 shadow-sm border border-slate-200 space-y-5 print-card">
+                    <h3 class="text-base font-bold text-slate-900 border-b border-slate-100 pb-2 flex items-center gap-2">
+                        <i class="fa-solid fa-triangle-exclamation text-orange-600"></i>
+                        2. Diagnóstico de Erros Operacionais e Feedback Construtivo (10 Minutos)
+                    </h3>
+
+                    <!-- DIAGNÓSTICO -->
+                    <div class="bg-orange-50/50 p-4 rounded-xl border border-orange-200 space-y-3">
+                        <span class="text-xs font-extrabold uppercase bg-orange-200 text-orange-900 px-2 py-0.5 rounded">🔍 1. Mapeamento da Falha / Vício do Chão de Fábrica</span>
+                        
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-800 mb-1">Descrição do Vício/Erro Observado:</label>
+                            <textarea id="step1_error_diag" oninput="autoSave()" rows="2" placeholder="Qual hábito incorreto os colaboradores estão executando no posto de trabalho?" class="w-full text-sm bg-white border border-orange-300 rounded-lg p-2.5 outline-none focus:border-orange-600"></textarea>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-800 mb-1">Impactos Diretos na Segurança, Qualidade ou Rendimento:</label>
+                            <textarea id="step1_impacts" oninput="autoSave()" rows="2" placeholder="O que esse erro gera de prejuízo ou risco de acidente?" class="w-full text-sm bg-white border border-orange-300 rounded-lg p-2.5 outline-none focus:border-orange-600"></textarea>
+                        </div>
+                    </div>
+
+                    <!-- TÉCNICA DE FEEDBACK EM 3 PASSOS -->
+                    <div class="space-y-3 bg-slate-50 p-4 rounded-xl border border-slate-200">
+                        <span class="text-xs font-extrabold uppercase bg-slate-200 text-slate-800 px-2 py-0.5 rounded">💬 2. Simulação da Abordagem e Feedback Construtivo</span>
+                        
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-800 mb-1">Passo 1 (Elogio / Ponto Forte):</label>
+                            <input type="text" id="step2_step1_praise" oninput="autoSave()" placeholder="Ex: 'Reconheço sua agilidade e dedicação no setor...'" class="w-full text-sm bg-white border border-slate-300 rounded-lg p-2.5 outline-none focus:border-orange-600">
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-800 mb-1">Passo 2 (Apresentação Neutra do Erro e Impacto):</label>
+                            <input type="text" id="step2_step2_show_error" oninput="autoSave()" placeholder="Ex: 'Porém, observe como esse corte picotado reduz o valor da peça...'" class="w-full text-sm bg-white border border-slate-300 rounded-lg p-2.5 outline-none focus:border-orange-600">
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-800 mb-1">Passo 3 (Orientação Prática da Forma Correta):</label>
+                            <input type="text" id="step2_step3_teach_correct" oninput="autoSave()" placeholder="Ex: 'Vamos alinhar a lâmina em 45º e puxar sem golpear...'" class="w-full text-sm bg-white border border-slate-300 rounded-lg p-2.5 outline-none focus:border-orange-600">
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-800 mb-1">3. Recapitulação Pedagógica:</label>
+                            <input type="text" id="step3_recap" oninput="autoSave()" placeholder="Frase de síntese..." class="w-full text-sm bg-slate-50 border border-slate-300 rounded-lg p-2.5 outline-none focus:border-orange-600">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-800 mb-1">4. Pacto de Mudança / Acompanhamento:</label>
+                            <input type="text" id="step3_pact" oninput="autoSave()" placeholder="Como e quando você verificará a melhoria do colega?" class="w-full text-sm bg-slate-50 border border-slate-300 rounded-lg p-2.5 outline-none focus:border-orange-600">
+                        </div>
+                    </div>
+                </section>
+            `;
+        }
+
+        // --- CAMPOS DIA 5 ---
+        function renderDay5Fields() {
+            return `
+                <section class="bg-white rounded-2xl p-5 sm:p-6 shadow-sm border border-slate-200 space-y-6 print-card">
+                    <h3 class="text-base font-bold text-slate-900 border-b border-slate-100 pb-2 flex items-center justify-between">
+                        <span class="flex items-center gap-2">
+                            <i class="fa-solid fa-award text-red-600"></i>
+                            2. Estrutura dos 5 Blocos do Treinamento Profissional (15 Minutos)
+                        </span>
+                        <span class="text-xs bg-red-100 text-red-800 font-bold px-2.5 py-1 rounded-full">Desafio Final em Trio</span>
+                    </h3>
+
+                    <!-- BLOCO 1 -->
+                    <div class="p-4 rounded-xl border border-red-200 bg-red-50/30 space-y-2">
+                        <div class="flex justify-between items-center">
+                            <span class="text-xs font-extrabold text-red-900 uppercase">Bloco 1: Abertura Motivacional & História Real</span>
+                            <span class="text-xs font-bold text-red-700">⏱️ 3 minutos</span>
+                        </div>
+                        <input type="text" id="b1_title" oninput="autoSave()" placeholder="Título do Bloco 1" class="w-full text-sm font-bold bg-white border border-slate-300 rounded-lg p-2">
+                        <textarea id="b1_content" oninput="autoSave()" rows="2" placeholder="Como o trio fará a introdução, apresentará os indicadores e prenderá a atenção?" class="w-full text-sm bg-white border border-slate-300 rounded-lg p-2.5 outline-none"></textarea>
+                    </div>
+
+                    <!-- BLOCO 2 -->
+                    <div class="p-4 rounded-xl border border-blue-200 bg-blue-50/30 space-y-2">
+                        <div class="flex justify-between items-center">
+                            <span class="text-xs font-extrabold text-blue-900 uppercase">Bloco 2: Base Teórica, Anatomia e Porquê Técnico</span>
+                            <span class="text-xs font-bold text-blue-700">⏱️ 3 minutos</span>
+                        </div>
+                        <input type="text" id="b2_title" oninput="autoSave()" placeholder="Título do Bloco 2" class="w-full text-sm font-bold bg-white border border-slate-300 rounded-lg p-2">
+                        <textarea id="b2_content" oninput="autoSave()" rows="2" placeholder="Explicação dos conceitos, padrões de qualidade e porquê do procedimento..." class="w-full text-sm bg-white border border-slate-300 rounded-lg p-2.5 outline-none"></textarea>
+                    </div>
+
+                    <!-- BLOCO 3 -->
+                    <div class="p-4 rounded-xl border border-emerald-200 bg-emerald-50/30 space-y-2">
+                        <div class="flex justify-between items-center">
+                            <span class="text-xs font-extrabold text-emerald-900 uppercase">Bloco 3: Demonstração Técnica Desacelerada (Demonstrador)</span>
+                            <span class="text-xs font-bold text-emerald-700">⏱️ 4 minutos</span>
+                        </div>
+                        <input type="text" id="b3_title" oninput="autoSave()" placeholder="Título do Bloco 3" class="w-full text-sm font-bold bg-white border border-slate-300 rounded-lg p-2">
+                        <textarea id="b3_content" oninput="autoSave()" rows="2" placeholder="O demonstrador executa em ritmo lento enquanto o facilitador narra os pontos críticos..." class="w-full text-sm bg-white border border-slate-300 rounded-lg p-2.5 outline-none"></textarea>
+                    </div>
+
+                    <!-- BLOCO 4 -->
+                    <div class="p-4 rounded-xl border border-purple-200 bg-purple-50/30 space-y-2">
+                        <div class="flex justify-between items-center">
+                            <span class="text-xs font-extrabold text-purple-900 uppercase">Bloco 4: Prática Guiada dos Alunos & Avaliação em Tempo Real</span>
+                            <span class="text-xs font-bold text-purple-700">⏱️ 3 minutos</span>
+                        </div>
+                        <input type="text" id="b4_title" oninput="autoSave()" placeholder="Título do Bloco 4" class="w-full text-sm font-bold bg-white border border-slate-300 rounded-lg p-2">
+                        <textarea id="b4_content" oninput="autoSave()" rows="2" placeholder="Voluntários praticam na bancada enquanto o avaliador preenche o checklist e corrige a postura..." class="w-full text-sm bg-white border border-slate-300 rounded-lg p-2.5 outline-none"></textarea>
+                    </div>
+
+                    <!-- BLOCO 5 -->
+                    <div class="p-4 rounded-xl border border-amber-200 bg-amber-50/30 space-y-2">
+                        <div class="flex justify-between items-center">
+                            <span class="text-xs font-extrabold text-amber-900 uppercase">Bloco 5: Encerramento, Cartão de Bolso & Plano de Ação</span>
+                            <span class="text-xs font-bold text-amber-700">⏱️ 2 minutos</span>
+                        </div>
+                        <input type="text" id="b5_title" oninput="autoSave()" placeholder="Título do Bloco 5" class="w-full text-sm font-bold bg-white border border-slate-300 rounded-lg p-2">
+                        <textarea id="b5_content" oninput="autoSave()" rows="2" placeholder="Síntese final, entrega do material de bolso e compromisso de aplicação no turno..." class="w-full text-sm bg-white border border-slate-300 rounded-lg p-2.5 outline-none"></textarea>
+                    </div>
+
+                    <!-- RUBRICA PROFISSIONAL DE AUTOAVALIAÇÃO -->
+                    <div class="border-t border-slate-200 pt-4 space-y-4">
+                        <h4 class="text-sm font-extrabold text-slate-900 uppercase tracking-wider flex items-center gap-2">
+                            <i class="fa-solid fa-star text-amber-500"></i>
+                            Rubrica Profissional de Desempenho do Trio (Notas de 1 a 5)
+                        </h4>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div class="bg-slate-50 p-3 rounded-xl border border-slate-200">
+                                <label class="block text-xs font-bold text-slate-800 mb-1">1. Domínio do Conteúdo Técnico:</label>
+                                <select id="rubric1" onchange="autoSave()" class="w-full text-xs p-2 bg-white border border-slate-300 rounded-lg font-bold">
+                                    <option value="1">1 - Insuficiente (Demonstrou dúvidas)</option>
+                                    <option value="2">2 - Regular (Erros conceituais)</option>
+                                    <option value="3">3 - Bom (Seguiu o padrão)</option>
+                                    <option value="4">4 - Muito Bom (Explicou os porquês)</option>
+                                    <option value="5" selected>5 - Excelente (Domínio total e segurança)</option>
+                                </select>
+                            </div>
+
+                            <div class="bg-slate-50 p-3 rounded-xl border border-slate-200">
+                                <label class="block text-xs font-bold text-slate-800 mb-1">2. Didática e Clareza na Explicação:</label>
+                                <select id="rubric2" onchange="autoSave()" class="w-full text-xs p-2 bg-white border border-slate-300 rounded-lg font-bold">
+                                    <option value="1">1 - Linguagem confusa</option>
+                                    <option value="2">2 - Raciocínio acelerado</option>
+                                    <option value="3">3 - Boa didática simples</option>
+                                    <option value="4">4 - Comunicação fluida e clara</option>
+                                    <option value="5" selected>5 - Didática exemplar e engajadora</option>
+                                </select>
+                            </div>
+
+                            <div class="bg-slate-50 p-3 rounded-xl border border-slate-200">
+                                <label class="block text-xs font-bold text-slate-800 mb-1">3. Uso dos Recursos e Demonstração:</label>
+                                <select id="rubric3" onchange="autoSave()" class="w-full text-xs p-2 bg-white border border-slate-300 rounded-lg font-bold">
+                                    <option value="1">1 - Não utilizou recursos</option>
+                                    <option value="2">2 - Uso tímido dos materiais</option>
+                                    <option value="3">3 - Demonstração adequada</option>
+                                    <option value="4" selected>4 - Bom uso visual e prático</option>
+                                    <option value="5">5 - Demonstração perfeita e impecável</option>
+                                </select>
+                            </div>
+
+                            <div class="bg-slate-50 p-3 rounded-xl border border-slate-200">
+                                <label class="block text-xs font-bold text-slate-800 mb-1">4. Sincronia do Trio e Gestão do Tempo:</label>
+                                <select id="rubric4" onchange="autoSave()" class="w-full text-xs p-2 bg-white border border-slate-300 rounded-lg font-bold">
+                                    <option value="1">1 - Estourou o tempo terrivelmente</option>
+                                    <option value="2">2 - Falta de sintonia entre os 3</option>
+                                    <option value="3">3 - Boa divisão dos papéis</option>
+                                    <option value="4">4 - Ótima gestão dos 15 minutos</option>
+                                    <option value="5" selected>5 - Sincronia perfeita e tempo cravado</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            `;
+        }
+
+        // --- CHECKLIST DO INSTRUTOR ---
+        function renderChecklistSection() {
+            return `
+                <section class="bg-white rounded-2xl p-5 sm:p-6 shadow-sm border border-slate-200 space-y-3 print-card">
+                    <h3 class="text-base font-bold text-slate-900 border-b border-slate-100 pb-2 flex items-center gap-2">
+                        <i class="fa-solid fa-list-check text-slate-700"></i>
+                        Checklist do Multiplicador (Antes de Entrar no Palco/Bancada)
+                    </h3>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs font-medium text-slate-700">
+                        <label class="flex items-center gap-2.5 p-2 rounded-xl hover:bg-slate-50 cursor-pointer">
+                            <input type="checkbox" id="chk1" onchange="autoSave()" class="w-4 h-4 text-emerald-600 rounded">
+                            <span>Ensaiou o tempo exato com cronômetro do celular?</span>
+                        </label>
+
+                        <label class="flex items-center gap-2.5 p-2 rounded-xl hover:bg-slate-50 cursor-pointer">
+                            <input type="checkbox" id="chk2" onchange="autoSave()" class="w-4 h-4 text-emerald-600 rounded">
+                            <span>Tem em mãos as amostras reais ou peças de demonstração?</span>
+                        </label>
+
+                        <label class="flex items-center gap-2.5 p-2 rounded-xl hover:bg-slate-50 cursor-pointer">
+                            <input type="checkbox" id="chk3" onchange="autoSave()" class="w-4 h-4 text-emerald-600 rounded">
+                            <span>Linguagem simples e direta para o chão de fábrica?</span>
+                        </label>
+
+                        <label class="flex items-center gap-2.5 p-2 rounded-xl hover:bg-slate-50 cursor-pointer">
+                            <input type="checkbox" id="chk4" onchange="autoSave()" class="w-4 h-4 text-emerald-600 rounded">
+                            <span>Postura física, firmeza de voz e contato visual treinados?</span>
+                        </label>
+                    </div>
+                </section>
+            `;
+        }
+
+        // GERENCIAMENTO DINÂMICO DE PARTICIPANTES
+        let currentParticipants = [""];
+
+        function renderParticipantsInputs() {
+            const container = document.getElementById('participantsContainer');
+            if (!container) return;
+
+            if (currentDay === 5) {
+                // No Dia 5 são obrigatoriamente 3 papéis bem definidos
+                container.innerHTML = `
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-2">
+                        <div>
+                            <span class="block text-[10px] font-extrabold text-red-800 uppercase">1. Facilitador Principal</span>
+                            <input type="text" id="part_0" oninput="autoSave()" placeholder="Nome do Facilitador" class="w-full text-xs p-2 bg-slate-50 border border-slate-300 rounded-lg outline-none">
+                        </div>
+                        <div>
+                            <span class="block text-[10px] font-extrabold text-emerald-800 uppercase">2. Demonstrador Técnico</span>
+                            <input type="text" id="part_1" oninput="autoSave()" placeholder="Nome do Demonstrador" class="w-full text-xs p-2 bg-slate-50 border border-slate-300 rounded-lg outline-none">
+                        </div>
+                        <div>
+                            <span class="block text-[10px] font-extrabold text-purple-800 uppercase">3. Avaliador de Prática</span>
+                            <input type="text" id="part_2" oninput="autoSave()" placeholder="Nome do Avaliador" class="w-full text-xs p-2 bg-slate-50 border border-slate-300 rounded-lg outline-none">
+                        </div>
+                    </div>
+                `;
+            } else {
+                container.innerHTML = currentParticipants.map((p, idx) => `
+                    <div class="flex items-center gap-2">
+                        <input type="text" id="part_${idx}" value="${p}" oninput="updateParticipantValue(${idx}, this.value)" placeholder="Nome do participante ${idx + 1}" class="w-full text-sm bg-slate-50 border border-slate-300 rounded-xl p-2.5 outline-none focus:border-slate-800 transition">
+                        ${currentParticipants.length > 1 ? `
+                            <button type="button" onclick="removeParticipantInput(${idx})" class="no-print text-red-500 hover:text-red-700 p-2">
+                                <i class="fa-solid fa-trash"></i>
+                            </button>
+                        ` : ''}
+                    </div>
+                `).join('');
+            }
+        }
+
+        function addParticipantInput() {
+            currentParticipants.push("");
+            renderParticipantsInputs();
+            autoSave();
+        }
+
+        function removeParticipantInput(idx) {
+            if (currentParticipants.length > 1) {
+                currentParticipants.splice(idx, 1);
+                renderParticipantsInputs();
+                autoSave();
+            }
+        }
+
+        function updateParticipantValue(idx, val) {
+            currentParticipants[idx] = val;
+            autoSave();
+        }
+
+        // CARREGAR EXEMPLO MODELO PREENCHIDO
+        function loadExampleData() {
+            const ex = EXAMPLES[currentDay];
+            if (!ex) return;
+
+            if (currentDay === 5) {
+                currentParticipants = ex.participants;
+            } else {
+                currentParticipants = [...ex.participants];
+            }
+
+            renderParticipantsInputs();
+
+            // Preenche campos
+            const setVal = (id, val) => {
+                const el = document.getElementById(id);
+                if (el) el.value = val || '';
+            };
+
+            const setChk = (id, val) => {
+                const el = document.getElementById(id);
+                if (el) el.checked = !!val;
+            };
+
+            setVal('groupName', ex.groupName);
+            setVal('area', ex.area);
+            setVal('topic', ex.topic);
+            setVal('objective', ex.objective);
+
+            if (currentDay === 1) {
+                setVal('step1_hook', ex.step1_hook);
+                setVal('step1_benefit', ex.step1_benefit);
+                setVal('step2_action', ex.step2_action);
+                setVal('step2_resource', ex.step2_resource);
+                setVal('step3_recap', ex.step3_recap);
+                setVal('step3_check', ex.step3_check);
+            } else if (currentDay === 2) {
+                setVal('step1_hook', ex.step1_hook);
+                setVal('step2_good_sample', ex.step2_good_sample);
+                setVal('step2_bad_sample', ex.step2_bad_sample);
+                setVal('step2_execution_steps', ex.step2_execution_steps);
+                setVal('step3_recap', ex.step3_recap);
+                setVal('step3_check', ex.step3_check);
+            } else if (currentDay === 3) {
+                setVal('step1_hook', ex.step1_hook);
+                setVal('step2_demo', ex.step2_demo);
+                setVal('step2_audience_action', ex.step2_audience_action);
+                setVal('step2_realtime_correction', ex.step2_realtime_correction);
+                setVal('step3_recap', ex.step3_recap);
+                setVal('step3_check', ex.step3_check);
+            } else if (currentDay === 4) {
+                setVal('step1_error_diag', ex.step1_error_diag);
+                setVal('step1_impacts', ex.step1_impacts);
+                setVal('step2_step1_praise', ex.step2_step1_praise);
+                setVal('step2_step2_show_error', ex.step2_step2_show_error);
+                setVal('step2_step3_teach_correct', ex.step2_step3_teach_correct);
+                setVal('step3_recap', ex.step3_recap);
+                setVal('step3_pact', ex.step3_pact);
+            } else if (currentDay === 5) {
+                setVal('b1_title', ex.b1_title); setVal('b1_content', ex.b1_content);
+                setVal('b2_title', ex.b2_title); setVal('b2_content', ex.b2_content);
+                setVal('b3_title', ex.b3_title); setVal('b3_content', ex.b3_content);
+                setVal('b4_title', ex.b4_title); setVal('b4_content', ex.b4_content);
+                setVal('b5_title', ex.b5_title); setVal('b5_content', ex.b5_content);
+                setVal('rubric1', ex.rubric1); setVal('rubric2', ex.rubric2);
+                setVal('rubric3', ex.rubric3); setVal('rubric4', ex.rubric4);
+
+                // Preencher nomes dos 3 integrantes do trio
+                if (ex.participants.length >= 3) {
+                    setVal('part_0', ex.participants[0]);
+                    setVal('part_1', ex.participants[1]);
+                    setVal('part_2', ex.participants[2]);
+                }
+            }
+
+            setChk('chk1', ex.chk1); setChk('chk2', ex.chk2);
+            setChk('chk3', ex.chk3); setChk('chk4', ex.chk4);
+
+            saveCurrentDayData(false);
+            showToast('💡 Exemplo Modelo carregado com sucesso!');
+        }
+
+        // SALVAMENTO AUTOMÁTICO EM LOCALSTORAGE
+        function autoSave() {
+            saveCurrentDayData(false);
+            updateProgress();
+        }
+
+        function getStorageKey() {
+            return `multiplicadores_trilha_dia_${currentDay}`;
+        }
+
+        function saveCurrentDayData(showNotification = false) {
+            const data = {
+                groupName: document.getElementById('groupName')?.value || '',
+                area: document.getElementById('area')?.value || '',
+                topic: document.getElementById('topic')?.value || '',
+                objective: document.getElementById('objective')?.value || '',
+                participants: getParticipantsArray(),
+                chk1: document.getElementById('chk1')?.checked || false,
+                chk2: document.getElementById('chk2')?.checked || false,
+                chk3: document.getElementById('chk3')?.checked || false,
+                chk4: document.getElementById('chk4')?.checked || false,
+            };
+
+            // Coleta de campos dinâmicos por dia
+            const fields = [
+                'step1_hook', 'step1_benefit', 'step2_action', 'step2_resource', 'step3_recap', 'step3_check',
+                'step2_good_sample', 'step2_bad_sample', 'step2_execution_steps', 'step2_demo',
+                'step2_audience_action', 'step2_realtime_correction', 'step1_error_diag', 'step1_impacts',
+                'step2_step1_praise', 'step2_step2_show_error', 'step2_step3_teach_correct', 'step3_pact',
+                'b1_title', 'b1_content', 'b2_title', 'b2_content', 'b3_title', 'b3_content',
+                'b4_title', 'b4_content', 'b5_title', 'b5_content', 'rubric1', 'rubric2', 'rubric3', 'rubric4'
+            ];
+
+            fields.forEach(f => {
+                const el = document.getElementById(f);
+                if (el) data[f] = el.value;
+            });
+
+            localStorage.setItem(getStorageKey(), JSON.stringify(data));
+
+            if (showNotification) {
+                showToast('💾 Dados salvos com sucesso!');
+            }
+        }
+
+        function getParticipantsArray() {
+            if (currentDay === 5) {
+                return [
+                    document.getElementById('part_0')?.value || '',
+                    document.getElementById('part_1')?.value || '',
+                    document.getElementById('part_2')?.value || ''
+                ];
+            } else {
+                return currentParticipants.map((_, i) => document.getElementById(`part_${i}`)?.value || '').filter(p => p.trim() !== '');
+            }
+        }
+
+        function loadCurrentDayData() {
+            const raw = localStorage.getItem(getStorageKey());
+            if (!raw) {
+                currentParticipants = [""];
+                renderParticipantsInputs();
+                return;
+            }
+
+            try {
+                const data = JSON.parse(raw);
+                if (data.participants && data.participants.length > 0) {
+                    currentParticipants = data.participants;
+                } else {
+                    currentParticipants = [""];
+                }
+
+                renderParticipantsInputs();
+
+                const setVal = (id, val) => {
+                    const el = document.getElementById(id);
+                    if (el) el.value = val || '';
+                };
+
+                const setChk = (id, val) => {
+                    const el = document.getElementById(id);
+                    if (el) el.checked = !!val;
+                };
+
+                setVal('groupName', data.groupName);
+                setVal('area', data.area);
+                setVal('topic', data.topic);
+                setVal('objective', data.objective);
+
+                if (currentDay === 5) {
+                    if (data.participants && data.participants.length >= 3) {
+                        setVal('part_0', data.participants[0]);
+                        setVal('part_1', data.participants[1]);
+                        setVal('part_2', data.participants[2]);
+                    }
+                }
+
+                const fields = [
+                    'step1_hook', 'step1_benefit', 'step2_action', 'step2_resource', 'step3_recap', 'step3_check',
+                    'step2_good_sample', 'step2_bad_sample', 'step2_execution_steps', 'step2_demo',
+                    'step2_audience_action', 'step2_realtime_correction', 'step1_error_diag', 'step1_impacts',
+                    'step2_step1_praise', 'step2_step2_show_error', 'step2_step3_teach_correct', 'step3_pact',
+                    'b1_title', 'b1_content', 'b2_title', 'b2_content', 'b3_title', 'b3_content',
+                    'b4_title', 'b4_content', 'b5_title', 'b5_content', 'rubric1', 'rubric2', 'rubric3', 'rubric4'
+                ];
+
+                fields.forEach(f => setVal(f, data[f]));
+
+                setChk('chk1', data.chk1); setChk('chk2', data.chk2);
+                setChk('chk3', data.chk3); setChk('chk4', data.chk4);
+
+            } catch (e) {
+                console.error("Erro ao carregar rascunho:", e);
+            }
+        }
+
+        // CÁLCULO DE PROGRESSO
+        function updateProgress() {
+            const inputs = document.querySelectorAll('#activeForm input[type="text"], #activeForm textarea');
+            let filled = 0;
+            inputs.forEach(i => {
+                if (i.value.trim() !== '') filled++;
+            });
+
+            const total = inputs.length || 1;
+            const pct = Math.min(100, Math.round((filled / total) * 100));
+
+            document.getElementById('progressText').innerText = `${pct}% Concluído`;
+            document.getElementById('progressBar').style.width = `${pct}%`;
+        }
+
+        // GERAR TEXTO FORMATADO PARA WHATSAPP
+        function buildFormattedMarkdown() {
+            const gName = document.getElementById('groupName')?.value || 'Não informado';
+            const area = document.getElementById('area')?.value || 'Não informada';
+            const topic = document.getElementById('topic')?.value || 'Pendente';
+            const obj = document.getElementById('objective')?.value || 'Pendente';
+            const parts = getParticipantsArray().join(', ') || 'Não informados';
+
+            let md = `🎓 *TRILHA DE MULTIPLICADORES - DIA 0${currentDay}*\n`;
+            md += `👥 *Grupo:* ${gName}\n`;
+            md += `📌 *Área:* ${area}\n`;
+            md += `👤 *Participantes:* ${parts}\n`;
+            md += `🎯 *Tema:* ${topic}\n`;
+            md += `💡 *Objetivo:* ${obj}\n`;
+            md += `-----------------------------------\n\n`;
+
+            if (currentDay === 1) {
+                md += `⏱️ *1. ABERTURA (1 min)*\n`;
+                md += `• Gancho: ${document.getElementById('step1_hook')?.value || 'N/I'}\n`;
+                md += `• Benefício: ${document.getElementById('step1_benefit')?.value || 'N/I'}\n\n`;
+                md += `⚙️ *2. DEMONSTRAÇÃO DA MICRO-HABILIDADE (3 min)*\n`;
+                md += `• Ação: ${document.getElementById('step2_action')?.value || 'N/I'}\n`;
+                md += `• Recurso: ${document.getElementById('step2_resource')?.value || 'N/I'}\n\n`;
+                md += `🏁 *3. FECHAMENTO & CHECAGEM (1 min)*\n`;
+                md += `• Resumo: ${document.getElementById('step3_recap')?.value || 'N/I'}\n`;
+                md += `• Pergunta: ${document.getElementById('step3_check')?.value || 'N/I'}\n`;
+            } else if (currentDay === 2) {
+                md += `🔍 *RECURSOS VISUAIS & PADRÕES (5 min)*\n`;
+                md += `• Gancho: ${document.getElementById('step1_hook')?.value || 'N/I'}\n`;
+                md += `🟢 *Padrão Bom:* ${document.getElementById('step2_good_sample')?.value || 'N/I'}\n`;
+                md += `🔴 *Padrão Ruim:* ${document.getElementById('step2_bad_sample')?.value || 'N/I'}\n`;
+                md += `• Passos de Execução: ${document.getElementById('step2_execution_steps')?.value || 'N/I'}\n`;
+            } else if (currentDay === 3) {
+                md += `✋ *APRENDIZAGEM ATIVA DA TURMA (5 min)*\n`;
+                md += `• Demonstração: ${document.getElementById('step2_demo')?.value || 'N/I'}\n`;
+                md += `• Prática da Turma: ${document.getElementById('step2_audience_action')?.value || 'N/I'}\n`;
+                md += `• Correção no Ato: ${document.getElementById('step2_realtime_correction')?.value || 'N/I'}\n`;
+            } else if (currentDay === 4) {
+                md += `🔍 *DIAGNÓSTICO & FEEDBACK CONSTRUTIVO (10 min)*\n`;
+                md += `• Vício/Erro: ${document.getElementById('step1_error_diag')?.value || 'N/I'}\n`;
+                md += `• Impacto: ${document.getElementById('step1_impacts')?.value || 'N/I'}\n`;
+                md += `• Feedback Passo 1 (Elogio): ${document.getElementById('step2_step1_praise')?.value || 'N/I'}\n`;
+                md += `• Feedback Passo 2 (Mostrar Erro): ${document.getElementById('step2_step2_show_error')?.value || 'N/I'}\n`;
+                md += `• Feedback Passo 3 (Ensinar Correto): ${document.getElementById('step2_step3_teach_correct')?.value || 'N/I'}\n`;
+            } else if (currentDay === 5) {
+                md += `🏆 *DESAFIO FINAL - TREINAMENTO COMPLETO (15 min)*\n`;
+                md += `1️⃣ *${document.getElementById('b1_title')?.value}:* ${document.getElementById('b1_content')?.value}\n\n`;
+                md += `2️⃣ *${document.getElementById('b2_title')?.value}:* ${document.getElementById('b2_content')?.value}\n\n`;
+                md += `3️⃣ *${document.getElementById('b3_title')?.value}:* ${document.getElementById('b3_content')?.value}\n\n`;
+                md += `4️⃣ *${document.getElementById('b4_title')?.value}:* ${document.getElementById('b4_content')?.value}\n\n`;
+                md += `5️⃣ *${document.getElementById('b5_title')?.value}:* ${document.getElementById('b5_content')?.value}\n\n`;
+                md += `⭐ *AUTOAVALIAÇÃO DO TRIO:*\n`;
+                md += `• Domínio Técnico: ${document.getElementById('rubric1')?.value}/5\n`;
+                md += `• Didática/Clareza: ${document.getElementById('rubric2')?.value}/5\n`;
+                md += `• Recursos/Demonstração: ${document.getElementById('rubric3')?.value}/5\n`;
+                md += `• Sincronia/Tempo: ${document.getElementById('rubric4')?.value}/5\n`;
+            }
+
+            return md;
+        }
+
+        function shareWhatsApp() {
+            const md = buildFormattedMarkdown();
+            const url = `https://api.whatsapp.com/send?text=${encodeURIComponent(md)}`;
+            window.open(url, '_blank');
+        }
+
+        function copyFormattedText() {
+            const text = buildFormattedMarkdown();
+            const textarea = document.createElement('textarea');
+            textarea.value = text;
+            document.body.appendChild(textarea);
+            textarea.select();
+
+            try {
+                document.execCommand('copy');
+                showToast('📋 Roteiro copiado com sucesso!');
+            } catch (err) {
+                showToast('Erro ao copiar texto.');
+            } finally {
+                document.body.removeChild(textarea);
+            }
+        }
+
+        function prepareAndPrint() {
+            window.print();
+        }
+
+        function clearCurrentDay() {
+            if (confirm(`Deseja apagar os dados preenchidos no Roteiro do Dia ${currentDay}?`)) {
+                localStorage.removeItem(getStorageKey());
+                currentParticipants = [""];
+                renderActiveForm();
+                updateProgress();
+                showToast('🗑️ Dados deste dia foram limpos.');
+            }
+        }
+
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            const toastMessage = document.getElementById('toastMessage');
+            toastMessage.innerText = msg;
+
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            toast.classList.add('translate-y-0', 'opacity-100');
+
+            setTimeout(() => {
+                toast.classList.remove('translate-y-0', 'opacity-100');
+                toast.classList.add('translate-y-20', 'opacity-0');
+            }, 3000);
+        }
+    </script>
+</body>
+</html>
